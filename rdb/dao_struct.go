@@ -13,5 +13,12 @@ type Employee struct {
 	Position string `json:"position"`
 	Account  string `json:"account"`
 	Payroll  int    `json:"payroll"`
+	Currency string `json:"curr"`
 	Date     int    `json:"date"`
+}
+
+type EmployeeOnboard struct {
+	MyEmployerId   string
+	MyEmployeeId   int
+	EmploymentType string
 }

@@ -23,10 +23,16 @@ func main() {
 		PingTest().
 		Version()
 
+	// employer operations - preferably admin's job
+	griffin = griffin.
+		AddEmployer().
+		DeleteEmployer()
+
 	// employee CRUD operations
 	griffin = griffin.
 		GetEmployee().
-		AddEmployee()
+		AddEmployee().
+		DeleteEmployee()
 
 	griffin.Conn.Run()
 }

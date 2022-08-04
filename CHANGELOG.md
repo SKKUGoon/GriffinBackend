@@ -92,3 +92,49 @@ Complete JSON database structure.
     - func Connect -> returning *redis.Client. Fixed from DataBase Method
 
 [Remove]
+
+
+# 0.0.4
+<p>
+
+cr employer, crud employee and docker
+</p>
+
+[Add]
+- ./main.go
+  - add AddEmployer() and DeleteEmployer()
+  - add AddEmployee() and DeleteEmployee()
+- ./rdb
+  - dao_struct.go
+    - struct EmployeeOnboard - new employee information
+  - re_json.go
+    - func JsonDel
+- ./rest
+  - constant.go
+    - Add constant - EMPLOYEE_CURRENCY, EMPLOYEE_CURRENCY_INDEX and messages
+  - src_serve.go
+    - method AddEmployer
+    - method DeleteEmployer
+    - method DeleteEmployee
+  - web_employee.go
+    - func getEmployee
+    - func postEmployee
+    - func deleteEmployee
+  - web_param.go
+    - func handleParamEmployerId
+    - func handleParamEmployType
+    - func handleParamDelEmployee
+  - web_handler.go
+    - func handleNewEmployeeID
+    - func handleNewEmployeeInfo
+    - func handleDelEmployee
+  - web_employer.go
+    - func postEmployer
+    - func delEmployer
+
+
+[Change]
+
+[Fix]
+
+[Remove]

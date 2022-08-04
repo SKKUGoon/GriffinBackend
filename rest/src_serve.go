@@ -31,9 +31,23 @@ func (g GriffinWS) Version() GriffinWS {
 	return g
 }
 
+func (g GriffinWS) AddEmployer() GriffinWS {
+	g.Conn.POST("/employer", func(c *gin.Context) {
+		postEmployer(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) DeleteEmployer() GriffinWS {
+	g.Conn.DELETE("/employer", func(c *gin.Context) {
+		delEmployer(c, g.Database)
+	})
+	return g
+}
+
 func (g GriffinWS) AddEmployee() GriffinWS {
 	g.Conn.POST("/employee", func(c *gin.Context) {
-		postEmployeePermanent(c, g.Database)
+		postEmployee(c, g.Database)
 	})
 	return g
 }
@@ -41,6 +55,13 @@ func (g GriffinWS) AddEmployee() GriffinWS {
 func (g GriffinWS) GetEmployee() GriffinWS {
 	g.Conn.GET("/employee", func(c *gin.Context) {
 		getEmployee(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) DeleteEmployee() GriffinWS {
+	g.Conn.DELETE("/employee", func(c *gin.Context) {
+		deleteEmployee(c, g.Database)
 	})
 	return g
 }
