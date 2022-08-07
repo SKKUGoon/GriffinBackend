@@ -7,12 +7,14 @@
 </div>
 
 <div>
+  
 [![GitHub Open Issues](https://img.shields.io/github/issues-raw/goonzard/GriffinBackend?color=green)](https://github.com/goonzard/GriffinBackend/issues)
 [![GitHub Closed Issues](https://img.shields.io/github/issues-closed-raw/goonzard/GriffinBackend?color=red)](https://github.com/goonzard/GriffinBackend/issues?q=is%3Aissue+is%3Aclosed)
 [![GitHub Open PR](https://img.shields.io/github/issues-pr-raw/goonzard/GriffinBackend?color=green)](https://github.com/goonzard/GriffinBackend/pulls)
 [![GitHub Closed PR](https://img.shields.io/github/issues-pr-closed-raw/goonzard/GriffinBackend?color=red)](https://github.com/goonzard/GriffinBackend/pulls?q=is%3Apr+is%3Aclosed)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+  
 </div>
 
 
