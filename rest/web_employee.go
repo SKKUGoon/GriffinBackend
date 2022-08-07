@@ -22,6 +22,8 @@ func getEmployee(c *gin.Context, db *redis.Client) {
 	if err != nil {
 		return
 	}
+	isPartial := handleParamEmployeePartial(c)
+
 	// permenent work force
 	e0 := rdb.JsonGet(db, fmt.Sprintf(PERMANENT_EMPLOYER_KEY, eid), PERMANENT_EMPLOYER_PATH, &employeeP)
 	// temporary work force
@@ -38,12 +40,40 @@ func getEmployee(c *gin.Context, db *redis.Client) {
 		p, f = employeeP[0][1:], employeeF[0][1:]
 	}
 	// send it to webserver
-	totalEmp := rdb.EmployeePlural{
-		Total:     len(employeeF[0]) + len(employeeP[0]) - 2,
-		Permanent: p,
-		Freelance: f,
+	p = processEmployee(p)
+	f = processEmployee(f)
+	if !isPartial {
+		totalEmp := rdb.EmployeePlural{
+			Total:     len(employeeF[0]) + len(employeeP[0]) - 2,
+			Permanent: p,
+			Freelance: f,
+		}
+
+		c.JSON(http.StatusOK, totalEmp)
+	} else {
+		var (
+			pPartial []rdb.Employee
+			fPartial []rdb.Employee
+		)
+		// partial array
+		if len(p) < 2 {
+			pPartial = p
+		} else {
+			pPartial = p[len(p)-2:]
+		}
+		if len(f) < 2 {
+			fPartial = f
+		} else {
+			fPartial = f[len(f)-2:]
+		}
+
+		partialEmp := rdb.EmployeePlural{
+			Total:     len(fPartial) + len(pPartial),
+			Permanent: pPartial,
+			Freelance: fPartial,
+		}
+		c.JSON(http.StatusOK, partialEmp)
 	}
-	c.JSON(http.StatusOK, totalEmp)
 }
 
 /**
@@ -78,7 +108,6 @@ func postEmployee(c *gin.Context, db *redis.Client) {
 	)
 
 	if err != nil {
-		fmt.Println(err)
 		c.JSON(http.StatusForbidden, gin.H{
 			"message": DATABASE_APPEND_FAIL,
 		})
@@ -94,8 +123,4 @@ func deleteEmployee(c *gin.Context, db *redis.Client) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": DATABASE_DELETE_SUCCESS,
 	})
-}
-
-func updateEmployee(c *gin.Context, db rdb.DataBase) {
-
 }

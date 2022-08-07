@@ -14,7 +14,9 @@ type GriffinWS struct {
 
 func (g GriffinWS) StartService() GriffinWS {
 	// start web server connection
-	g.Conn = gin.Default()
+	c := gin.Default()
+	c.Use(CORSMiddleware())
+	g.Conn = c
 	// add database initialization
 	d := rdb.Connect()
 	g.Database = d
@@ -62,6 +64,39 @@ func (g GriffinWS) GetEmployee() GriffinWS {
 func (g GriffinWS) DeleteEmployee() GriffinWS {
 	g.Conn.DELETE("/employee", func(c *gin.Context) {
 		deleteEmployee(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) GetPrice() GriffinWS {
+	g.Conn.GET("/price", getBinanceTrade)
+	return g
+}
+
+func (g GriffinWS) AddPaymentRecord() GriffinWS {
+	g.Conn.POST("/payment", func(c *gin.Context) {
+		postPayment(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) GetPaymentRecord() GriffinWS {
+	g.Conn.GET("/payment", func(c *gin.Context) {
+		getPayment(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) GetPaymentRecordMonth() GriffinWS {
+	g.Conn.GET("/paymentMonth", func(c *gin.Context) {
+		getPaymentMonthly(c, g.Database)
+	})
+	return g
+}
+
+func (g GriffinWS) Login() GriffinWS {
+	g.Conn.GET("/login", func(c *gin.Context) {
+		loginEmployer(c, g.Database)
 	})
 	return g
 }
