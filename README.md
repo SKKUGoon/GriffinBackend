@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/16751025/100414316-c90d2980-30bc-11eb-9e05-82c324c4136e.png" alt="icon" width="250"/>
+<img src="https://user-images.githubusercontent.com/54009920/183289711-bf7c3303-0cf6-48ee-a270-d777d8d1bc45.svg" alt="icon" width="250"/>
 
 📆 2020.11.16 ~ 2020.12.18
 
